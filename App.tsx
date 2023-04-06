@@ -13,7 +13,7 @@ import {
 } from "react-native-paper";
 
 import Examples from "./src/Examples";
-import SomeComponent from "./src/SomeComponent";
+import VolumeSlider from "./src/VolumeSlider";
 import { createStackNavigator } from "./src/utils";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
@@ -51,7 +51,7 @@ export default function App() {
         <StatusBar style="auto" />
         <Stack.Navigator initialRouteName="Accessibility Examples">
           <Stack.Screen name="Accessibility Examples" component={Examples} />
-          <Stack.Screen name="Some Component" component={SomeComponent} />
+          <Stack.Screen name="Volume Slider" component={VolumeSlider} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
