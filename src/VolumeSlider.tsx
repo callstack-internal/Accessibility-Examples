@@ -1,10 +1,11 @@
-import { StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRef, useState } from "react";
 import { Card } from "react-native-paper";
 
 export default function VolumeSliderRoute() {
   const [inaccessibleVolume, setInaccessibleVolume] = useState(0.2);
+  const [accessibleVolume, setAccessibleVolume] = useState(0.2);
   return (
     <View style={styles.screen}>
       <Card style={styles.card}>
@@ -13,6 +14,15 @@ export default function VolumeSliderRoute() {
           <InaccessibleVolumeSlider
             value={inaccessibleVolume}
             onChange={setInaccessibleVolume}
+          />
+        </Card.Content>
+      </Card>
+      <Card style={styles.card}>
+        <Card.Title title="Accessible" />
+        <Card.Content>
+          <AccessibleVolumeSlider
+            value={accessibleVolume}
+            onChange={setAccessibleVolume}
           />
         </Card.Content>
       </Card>
@@ -76,6 +86,66 @@ function InaccessibleVolumeSlider({ value: valueProp, onChange }: Props) {
     >
       <View style={[styles.volumeSliderBar, { width: `${value * 100}%` }]} />
       <Ionicons
+        style={styles.volumeSliderIcon}
+        name="md-volume-high"
+        color="#000000"
+        size={iconSize}
+      />
+    </View>
+  );
+}
+
+function AccessibleVolumeSlider({ value: valueProp, onChange }: Props) {
+  const containerWidthRef = useRef(0);
+  const [dragLocation, setDragLocation] = useState<[number, number] | null>(
+    null
+  );
+  const value = dragLocation
+    ? newValue(
+        dragLocation[1],
+        dragLocation[0],
+        containerWidthRef.current,
+        valueProp
+      )
+    : valueProp;
+  const percentage = value * 100;
+  return (
+    <View
+      style={styles.volumeSliderContainer}
+      onLayout={({
+        nativeEvent: {
+          layout: { width },
+        },
+      }) => {
+        containerWidthRef.current = width;
+      }}
+      onStartShouldSetResponder={() => true}
+      onMoveShouldSetResponder={() => true}
+      onResponderGrant={({ nativeEvent: { locationX } }) => {
+        setDragLocation([locationX, locationX]);
+      }}
+      onResponderMove={({ nativeEvent: { locationX } }) => {
+        setDragLocation((current) =>
+          current ? [current[0], locationX] : null
+        );
+      }}
+      onResponderRelease={({ nativeEvent: { locationX } }) => {
+        setDragLocation(null);
+        if (dragLocation && containerWidthRef.current) {
+          onChange(
+            newValue(
+              locationX,
+              dragLocation[0],
+              containerWidthRef.current,
+              valueProp
+            )
+          );
+        }
+      }}
+    >
+      <View style={[styles.volumeSliderBar, { width: `${percentage}%` }]} />
+      <Ionicons
+        importantForAccessibility="no"
         style={styles.volumeSliderIcon}
         name="md-volume-high"
         color="#000000"
