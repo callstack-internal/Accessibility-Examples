@@ -8,6 +8,7 @@ export type RootStackParamList = {
   "Accessibility Examples": undefined;
   "Volume Slider": undefined;
   "Text Contrast": undefined;
+  "Touch Region": undefined;
 };
 
 export const createStackNavigator =
