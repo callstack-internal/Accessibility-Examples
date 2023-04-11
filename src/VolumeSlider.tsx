@@ -142,6 +142,27 @@ function AccessibleVolumeSlider({ value: valueProp, onChange }: Props) {
           );
         }
       }}
+      accessible
+      aria-valuemax={100}
+      aria-valuemin={0}
+      {...Platform.select({
+        android: {
+          "aria-valuetext": `${percentage.toFixed(0)}%`,
+        },
+        default: {
+          "aria-valuenow": percentage,
+        },
+      })}
+      aria-label="Volume"
+      role="slider"
+      accessibilityActions={[{ name: "increment" }, { name: "decrement" }]}
+      onAccessibilityAction={({ nativeEvent: { actionName } }) => {
+        if (actionName === "increment") {
+          onChange(Math.min(1, value + 0.05));
+        } else if (actionName === "decrement") {
+          onChange(Math.max(0, value - 0.05));
+        }
+      }}
     >
       <View style={[styles.volumeSliderBar, { width: `${percentage}%` }]} />
       <Ionicons
