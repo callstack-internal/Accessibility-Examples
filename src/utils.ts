@@ -7,6 +7,7 @@ import { createStackNavigator as vendorCreateStackNavigator } from "@react-navig
 export type RootStackParamList = {
   "Accessibility Examples": undefined;
   "Volume Slider": undefined;
+  "Text Contrast": undefined;
 };
 
 export const createStackNavigator =
