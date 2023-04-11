@@ -49,6 +49,9 @@ function AccessibleStarHitSlop() {
     <Pressable
       style={styles.pressable}
       onPress={() => setIsStarred((value) => !value)}
+      aria-label={isStarred ? "Remove from favorites" : "Add to favorites"}
+      role="button"
+      hitSlop={24}
     >
       <MaterialCommunityIcons
         size={20}
