@@ -12,6 +12,18 @@ export default function TouchRegionRoute() {
           <InaccessibleStar />
         </Card.Content>
       </Card>
+      <Card style={styles.card}>
+        <Card.Title title="Accessible (variant 1)" />
+        <Card.Content>
+          <AccessibleStarHitSlop />
+        </Card.Content>
+      </Card>
+      <Card style={styles.card}>
+        <Card.Title title="Accessible (variant 2)" />
+        <Card.Content>
+          <AccessibleStarLarger />
+        </Card.Content>
+      </Card>
     </View>
   );
 }
@@ -31,11 +43,41 @@ function InaccessibleStar() {
   );
 }
 
+function AccessibleStarHitSlop() {
+  const [isStarred, setIsStarred] = useState(false);
+  return (
+    <Pressable
+      style={styles.pressable}
+      onPress={() => setIsStarred((value) => !value)}
+    >
+      <MaterialCommunityIcons
+        size={20}
+        name={isStarred ? "star-remove" : "star"}
+      />
+    </Pressable>
+  );
+}
+
+function AccessibleStarLarger() {
+  const [isStarred, setIsStarred] = useState(false);
+  return (
+    <Pressable
+      style={styles.pressable}
+      onPress={() => setIsStarred((value) => !value)}
+    >
+      <MaterialCommunityIcons
+        size={20}
+        name={isStarred ? "star-remove" : "star"}
+      />
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
   screen: {
     alignSelf: "center",
     maxWidth: 400,
-    width: 400,
+    width: "100%",
     paddingHorizontal: 24,
   },
   card: {
