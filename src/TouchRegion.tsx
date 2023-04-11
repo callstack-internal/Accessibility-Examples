@@ -65,11 +65,13 @@ function AccessibleStarLarger() {
   const [isStarred, setIsStarred] = useState(false);
   return (
     <Pressable
-      style={styles.pressable}
+      style={[styles.pressable, styles.largerPressable]}
       onPress={() => setIsStarred((value) => !value)}
+      aria-label={isStarred ? "Remove from favorites" : "Add to favorites"}
+      role="button"
     >
       <MaterialCommunityIcons
-        size={20}
+        size={40}
         name={isStarred ? "star-remove" : "star"}
       />
     </Pressable>
@@ -95,5 +97,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#c0b755",
     alignSelf: "center",
     marginHorizontal: 4,
+  },
+  largerPressable: {
+    width: 48,
+    height: 48,
   },
 });
