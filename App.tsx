@@ -14,6 +14,7 @@ import {
 
 import Examples from "./src/Examples";
 import VolumeSlider from "./src/VolumeSlider";
+import TextContrast from "./src/TextContrast";
 import { createStackNavigator } from "./src/utils";
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
@@ -52,6 +53,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Accessibility Examples">
           <Stack.Screen name="Accessibility Examples" component={Examples} />
           <Stack.Screen name="Volume Slider" component={VolumeSlider} />
+          <Stack.Screen name="Text Contrast" component={TextContrast} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

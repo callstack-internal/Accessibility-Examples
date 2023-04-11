@@ -4,6 +4,7 @@ import { FlatList } from "react-native";
 import { RootStackParamList, useNavigation } from "./utils";
 
 const routes = [
+  "Text Contrast",
   "Volume Slider",
 ] as const satisfies readonly (keyof RootStackParamList)[];
 export default function Examples() {
