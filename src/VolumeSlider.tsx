@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   screen: {
     alignSelf: "center",
     maxWidth: 400,
-    width: 400,
+    width: "100%",
     paddingHorizontal: 24,
   },
   card: {
